@@ -27,9 +27,10 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [tags, setTags] = useState([]);
 
-    useEffect(() => {
-        dispatch(getPosts());  // to dispatch an action
-    }, [currentId, dispatch]);
+    // we no longer will nuse that from the home page
+    // useEffect(() => {
+    //     dispatch(getPosts());  // to dispatch an action
+    // }, [currentId, dispatch]);
 
     const searchPost = () => {
         if (search.trim() || tags) {
@@ -75,7 +76,7 @@ const Home = () => {
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
                         <Paper elevation={6}>
-                            <Pagination />
+                            <Pagination page={page}/>
                         </Paper>
                     </Grid>
                 </Grid>

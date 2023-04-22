@@ -2,13 +2,14 @@ import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE } from '../constants
 import * as api from '../api'; // import everything from the actions as api
 
 // Action Creators - return actions
-export const getPosts = () => async (dispatch) => {            // dealing with async logic, thus the syntax, thunk
+export const getPosts = (page) => async (dispatch) => {            // dealing with async logic, thus the syntax, thunk
 
     try {
-        const { data } = await api.fetchPosts();
+        const { data } = await api.fetchPosts(page);
+        
         dispatch({ type: FETCH_ALL, payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 };
 
