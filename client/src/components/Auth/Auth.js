@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
@@ -38,6 +38,7 @@ const Auth = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
+
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
         setShowPassword(false);
@@ -56,7 +57,7 @@ const Auth = () => {
     }
 
     const googleFailure = () => {
-        googleFailure.log('Google Sign In was unsuccessful. Try Again Later')
+        console.log('Google Sign In was unsuccessful. Try Again Later')
     }
 
     return (

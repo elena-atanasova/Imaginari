@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
 import * as api from '../api'; // import everything from the actions as api
 
 // Action Creators - return actions
@@ -9,6 +9,15 @@ export const getPosts = () => async (dispatch) => {            // dealing with a
         dispatch({ type: FETCH_ALL, payload: data });
     } catch (error) {
         console.log(error.message);
+    }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+        dispatch({ type: FETCH_BY_SEARCH, payload: data })
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -21,10 +30,10 @@ export const createPost = (post) => async (dispatch) => {
     }
 }
 
-export const updatePost = (id, post) => async(dispatch) => {
+export const updatePost = (id, post) => async (dispatch) => {
     try {
-       const { data } = await api.updatePost(id, post); // returns the updated post
-       dispatch({ type: UPDATE, payload: data })
+        const { data } = await api.updatePost(id, post); // returns the updated post
+        dispatch({ type: UPDATE, payload: data })
     } catch (error) {
         console.log(error);
     }
@@ -42,7 +51,7 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = (id) => async (dispatch) => {
     try {
         const { data } = await api.likePost(id);
-        dispatch({ type: UPDATE, payload: data});
+        dispatch({ type: UPDATE, payload: data });
     } catch (error) {
         console.log(error);
     }
