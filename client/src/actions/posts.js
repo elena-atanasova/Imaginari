@@ -1,5 +1,17 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_POST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, START_LOADING, END_LOADING } from '../constants/actionTypes';
 import * as api from '../api'; // import everything from the actions as api
+
+export const getPost = (id) => async (dispatch) => {            // dealing with async logic, thus the syntax, thunk
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.fetchPost(id);
+        
+        dispatch({ type: FETCH_POST, payload: data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // Action Creators - return actions
 export const getPosts = (page) => async (dispatch) => {            // dealing with async logic, thus the syntax, thunk
