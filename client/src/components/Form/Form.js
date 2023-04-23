@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
@@ -10,10 +11,11 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);  // for updating the posts
+    const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);  // for updating the posts
     const classes = useStyles();
     const dispatch = useDispatch();  // allows to dispatch actions
     const user = JSON.parse(localStorage.getItem('profile'));
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -23,7 +25,7 @@ const Form = ({ currentId, setCurrentId }) => {
         e.preventDefault();     // to prevent from getting refresh in the browser
 
         if (currentId === 0) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }))
+            dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
         } else {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
         }
@@ -36,7 +38,7 @@ const Form = ({ currentId, setCurrentId }) => {
     };
 
     // if user not logged in show that they can't create a post
-    if(!user?.result?.name) {
+    if (!user?.result?.name) {
         return (
             <Paper className={classes.paper}>
                 <Typography variant="h6" align="center">
