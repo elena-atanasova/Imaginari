@@ -11,10 +11,14 @@ const postSchema = mongoose.Schema({
         type: [String], // array of strings, of IDs
         default: [],
     },
+    comments: {
+        type: [String],
+        default: [],
+    },
     createdAt: {
         type: Date,
         default: new Date()
-    }
+    },
 });
 
 const PostMessage = mongoose.model('PostMessage', postSchema);

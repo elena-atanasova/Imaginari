@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, FETCH_POST, DELETE, FETCH_BY_SEARCH, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, FETCH_POST, DELETE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, COMMENT } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
@@ -21,6 +21,17 @@ export default (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
         case UPDATE:
             return { ...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post) };
+        case COMMENT:
+            return {
+                ...state, posts: state.posts.map((post) => {
+                    // return all the other posts normally
+                    if (post._id === action.payload._id) {
+                        return action.payload;
+                    }
+                    // change the post that just received a comment
+                    return post;
+                })
+            };
         case CREATE:
             return { ...state, posts: [...state, action.payload] };
 
