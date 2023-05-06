@@ -1,18 +1,34 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export default makeStyles((theme) => ({
     appBar: {
-        borderRadius: 15,
-        margin: '30px 0',
+        borderRadius: '5px',
+        marginTop: '10px',
+        marginBottom: '20px',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '10px 50px',
+        padding: '5px 40px',
         [theme.breakpoints.down('sm')]: {
             flexDirection: 'column',
         },
+        width: '100%',
+    },
+    share: {
+        // fontSize: '10px',
+        // [theme.shape.borderRadius('share')]: {
+        //     borderRadius: '20px'
+        // }
+        marginRight: '20px'
+    },
+    logo: {
+        textDecoration: 'none',
+        fontFamily: 'Bradley Hand, cursive',
+        fontSize: '2em',
+        fontWeight: 300,
     },
     heading: {
         color: theme.palette.primary.main,
@@ -23,6 +39,7 @@ export default makeStyles((theme) => ({
     image: {
         marginLeft: '10px',
         marginTop: '5px',
+        marginRight: '30px',
     },
     toolbar: {
         display: 'flex',
@@ -51,7 +68,7 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         textAlign: 'center',
     },
-    brandContainer: {
+    container: {
         display: 'flex',
         alignItems: 'center',
     },

@@ -3,9 +3,9 @@ import { Container } from '@material-ui/core';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
 import Home from './components/Home/Home';
-import Auth from './components/Auth/Auth';
+import Authentication from './components/Authentication';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
                         <Route path='/posts' element={<Home />} />
                         <Route path='/posts/search' element={<Home />} />
                         <Route path='/posts/:id' element={<PostDetails />} />
-                        <Route path="/auth" element={!user ? <Auth /> : <Navigate to='/posts' />} />
+                        <Route path="/auth" element={!user ? <Authentication /> : <Navigate to='/posts' />} />
                     </Routes>
                 </Container>
             </GoogleOAuthProvider>
