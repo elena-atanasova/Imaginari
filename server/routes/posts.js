@@ -10,10 +10,12 @@ router.get('/search', getPostsBySearch);
 router.get('/', getPosts); // all users no matter logged in or not can see the posts
 router.get('/:id', getPost);
 
+// auth means user has to be authenticated first to do the action
 router.post('/', auth, createPost); // to create a post have to be logged in
 // router.get('/:id', getPost); don't need it cause we don't have a separate page for the posts
 router.patch('/:id', auth, updatePost);
 router.delete('/:id', auth, deletePost);
+
 router.patch('/:id/likePost', auth, likePost);
 router.post('/:id/commentPost', auth, commentPost);
 

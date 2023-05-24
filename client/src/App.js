@@ -1,14 +1,20 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import { Container } from '@material-ui/core';
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import Navbar from './components/Navbar';
-import Home from './components/Home/Home';
-import Authentication from './components/Authentication';
-import PostDetails from './components/PostDetails/PostDetails.jsx';
+import Navbar from './components/Navbar.js';
+import Home from './components/Home.js';
+import Authentication from './components/Authentication.js';
+import Details from './components/Details.js';
+import UploadPost from './components/UploadPost.js';
+
 
 const App = () => {
+
+    // get the user
     const user = JSON.parse(localStorage.getItem('profile'));
 
     return (
@@ -20,8 +26,9 @@ const App = () => {
                         <Route path="/" element={<Navigate to='/posts' />} />
                         <Route path='/posts' element={<Home />} />
                         <Route path='/posts/search' element={<Home />} />
-                        <Route path='/posts/:id' element={<PostDetails />} />
+                        <Route path='/posts/:id' element={<Details />} />
                         <Route path="/auth" element={!user ? <Authentication /> : <Navigate to='/posts' />} />
+                        <Route path='/upload' element={<UploadPost />} />
                     </Routes>
                 </Container>
             </GoogleOAuthProvider>

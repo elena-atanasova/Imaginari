@@ -11,9 +11,7 @@ import jwt_decode from 'jwt-decode';
 import useStyles from '../assets/styles/AuthenticationStyles';
 import { signin, signup } from '../actions/auth';
 import InputField from './InputField';
-import { AUTH } from '../constants/actionTypes';
-
-
+import { AUTH } from '../constants/actions';
 
 import background from '../assets/images/background.jpg';
 import logo from '../assets/images/logo.png';
@@ -33,7 +31,7 @@ const Authentication = () => {
 
     // sign in or sign up
     const switchAuthType = () => {
-        setIsUser((prev) => !prev);
+        setIsUser((previous) => !previous);
         setShowPassword(false);
     };
 
@@ -41,11 +39,10 @@ const Authentication = () => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
     };
 
-    const handleShowPassword = () => setShowPassword((prev) => !prev);
+    const handleShowPassword = () => setShowPassword((previous) => !previous);
 
     const handleSubmit = (e) => {
-        // prevents page from reloading
-        e.preventDefault();
+        e.preventDefault();     // prevents page from reloading
 
         if (isUser) {
             dispatch(signup(userInfo, navigate));
@@ -72,13 +69,13 @@ const Authentication = () => {
 
     return (
         <Box sx={{ position: 'fixed', top: '0', left: '0', right: '0', bottom: '0', backgroundImage: `url(${background})`, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Grid container spacing={2} alignItems='center' style={{maxWidth: '400px', width: '100%'}}>
-                <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 40  }}>
+            <Grid container spacing={2} alignItems='center' style={{ maxWidth: '100%' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 40 }}>
                     <Link onClick={() => navigate('/')}><img src={logo} alt="Logo" /></Link>
                 </Box>
             </Grid>
 
-            <Box sx={{ marginLeft: 'auto', marginRight: 40, maxWidth: '400px', width: '100%'}}>
+            <Box sx={{ marginLeft: 'auto', marginRight: 40 }}>
                 <Container component="main" maxWidth="xs" className={classes.background}>
                     <Paper className={classes.paper} elevation={3}>
                         <Typography className={classes.welcome} variant="h4">{isUser ? 'Sign Up' : 'Sign In'}</Typography>
@@ -95,7 +92,7 @@ const Authentication = () => {
                                 <InputField name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                                 {isUser && <InputField name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
                             </Grid>
-                            <Button type="submit" size='large' variant="filled" color="primary" sx={{ mt: '2rem', fontFamily: "Arial", fontSize: "12px" }}>{isUser ? 'Sign Up' : 'Sign In'}</Button>
+                            <Button type="submit" size='large' variant="filled" color="primary" sx={{ mt: '2rem', fontFamily: "Calibri", fontSize: "14px" }}>{isUser ? 'Sign Up' : 'Sign In'}</Button>
                             <Divider style={{ marginTop: '20px', marginBottom: '20px', fontFamily: 'Arial', color: 'grey', fontSize: '12px' }}>OR</Divider>
 
                             <Grid className={classes.googleButton} container justifyContent='center' ><GoogleLogin onSuccess={googleSignInSuccess} onError={googleSignInFail} cookiePolicy='single_host_origin' /></Grid>

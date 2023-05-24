@@ -10,11 +10,14 @@ import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
+
+// env variables
 dotenv.config();
 
 // setting up the body parser, sending images
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30nm", extended: true }));
+
 app.use(cors());
 
 // use middleware to connect the postRoutes with our application
@@ -26,10 +29,9 @@ app.use('/user', userRoutes);
 // https://www.mongodb.com/cloud/atlas
 
 //const CONNECTION_URL = 'mongodb+srv://imaginari:imaginari123@cluster0.mm7zfs4.mongodb.net/?retryWrites=true&w=majority'; 
+// protecting as env variable
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+    .then(() => app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`)))
     .catch((error) => console.log(error.message));
-
-// mongoose.set('useFindAndModify', false); 
